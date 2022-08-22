@@ -6,27 +6,27 @@ Select the optimal features in a dataset using the stepwise method.
 
 1. Install:
 
-pip install model_selection
+pip install Selection_Methods
 
 2. Plug in your train and test dataset, and your preferred algorithm.
 
 # Forward_Stepwise
-from model_selection import Forward_Stepwise
+from Selection_Methods.Forward_Stepwise import forward_stepwise
 
 # initialize forward_stepwise object, inputting your already split train and test dataframes, and your already created regression model object.
 
-selection = Forward_Stepwise.forward_stepwise(x_train, x_test, y_train, y_test, linear_model)
+selection = forward_stepwise(x_train, x_test, y_train, y_test, linear_model)
 
 # select the best features using the stepwise algorithm through the .select() method.
 
 final_list, final_score = selection.select()
 
 # Backward_Stepwise
-from model_selection import Backward_Stepwise
+from Selection_Methods.Backward_Stepwise import backward_stepwise
 
 # initialize backward_stepwise object, inputting your already split train and test dataframes, and your already created regression model object.
 
-selection = Backward_Stepwise.backard_stepwise(x_train, x_test, y_train, y_test, linear_model)
+selection = backard_stepwise(x_train, x_test, y_train, y_test, linear_model)
 
 # select the best features using the stepwise algorithm through the .select() method.
 
