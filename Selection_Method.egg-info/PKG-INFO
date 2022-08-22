@@ -2,6 +2,7 @@ Metadata-Version: 2.1
 Name: Selection-Method
 Version: 0.0.2
 Summary: For selecting the optimal features using the stepwise algorithm
+Home-page: https://github.com/dub-em/Selection-Methods-PythonTPL
 Author: Dubem
 Author-email: michaeligbomezie@gmail.com
 Classifier: Programming Language :: Python :: 3
