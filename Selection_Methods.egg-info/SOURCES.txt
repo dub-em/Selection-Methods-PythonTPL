@@ -1,10 +1,10 @@
 LICENSE
 README.md
 pyproject.toml
-Model_Selection/Backward_Stepwise.py
-Model_Selection/Forward_Stepwise.py
-Model_Selection/__init__.py
-Model_Selection.egg-info/PKG-INFO
-Model_Selection.egg-info/SOURCES.txt
-Model_Selection.egg-info/dependency_links.txt
-Model_Selection.egg-info/top_level.txt
+Selection_Methods/Backward_Stepwise.py
+Selection_Methods/Forward_Stepwise.py
+Selection_Methods/__init__.py
+Selection_Methods.egg-info/PKG-INFO
+Selection_Methods.egg-info/SOURCES.txt
+Selection_Methods.egg-info/dependency_links.txt
+Selection_Methods.egg-info/top_level.txt
