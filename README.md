@@ -1,33 +1,61 @@
-# Stepwise Selection
+# Selection Method
 
-Select the optimal features in a dataset using the stepwise method.
+### Purpose of the Package
++ Selection Method is a Python module which implements a statistical learning method for selecting features (for predicting a target variable) in a given dataset.
 
-## Instructions
+### Features
++ Collection of Feature Selection Methods
+    - Forward Stepwise
+    - Backward Stepwise
+    - etc
 
-1. Install:
+### Getting Started
+The package can be found on pypi hence you can install it using pip
 
-pip install Selection_Method
+### Installation
+```bash
+pip install Selection_Method 
+```
 
-2. Plug in your train and test dataset, and your preferred algorithm.
+### Usage
+Forward_Stepwise
+```python
+>>> from Selection_Method.Forward_Stepwise import forward_stepwise
+>>>
+>>> #initialize forward_stepwise object, and your already created regression model object.
+>>> selection = forward_stepwise(linear_model)
+>>>
+>>> #input your already split train and test datasets into the .select_features() method, and select the optimal features using the stepwise algorithm.
+>>> final_list, final_score = selection.select_features(x_train, x_test, y_train, y_test)
+```
 
-# Forward_Stepwise
-from Selection_Method.Forward_Stepwise import forward_stepwise
+### Example
+```python
+>>> import pandas as pd
+>>> from sklearn.linear_model import LinearRegression
+>>> from Selection_Method.Forward_Stepwise import forward_stepwise
+>>>
+>>> #define your linear regression object
+>>> linear_model = LinearRegression()
+>>>
+>>> #import your preferred dataset
+>>> crime_xtrain = pd.read_csv('x_train.csv')
+>>> crime_xtest = pd.read_csv('x_test.csv')
+>>> crime_ytrain = pd.read_csv('y_train.csv')
+>>> crime_ytest = pd.read_csv('y_test.csv')
+>>>
+>>> #initialize forward_stepwise object
+>>> selection = forward_stepwise(linear_model) 
+>>>
+>>> #input your train and test dataset into the .select_features() method and execute.
+>>> final_list, final_score = selection.select_features(x_train, x_test, y_train, y_test)
+>>> print(forward_list, f_score)
+['pctKids2Par', 'pctWhite', 'houseVacant', 'State', 'pctUrban', 'pctWorkMom18', 'persPoverty', 'pctRetire', 'pct1624', 'pctEmployMfg', 'ownHousLowQ', 'pct2Par', 'medOwnCostPctWO', 'numForeignBorn', 'medRentpctHousInc', 'pctEmploy', 'pctWwage', 'pctHousWOplumb', 'pctSameState5', 'otherPerCap', 'pctHousWOphone', 'pctPoverty', 'persPerOccupHous', 'persPerOwnOccup', 'persPerFam', 'rentMed', 'persHomeless', 'NAperCap'] 0.6315059907414283
+```
 
-# initialize forward_stepwise object, inputting your already split train and test dataframes, and your already created regression model object.
+### Contribution
+This Project is open to contribution and collaboration. 
+Feel free to connect.
 
-selection = forward_stepwise(x_train, x_test, y_train, y_test, linear_model)
-
-# select the best features using the stepwise algorithm through the .select() method.
-
-final_list, final_score = selection.select()
-
-# Backward_Stepwise
-from Selection_Method.Backward_Stepwise import backward_stepwise
-
-# initialize backward_stepwise object, inputting your already split train and test dataframes, and your already created regression model object.
-
-selection = backard_stepwise(x_train, x_test, y_train, y_test, linear_model)
-
-# select the best features using the stepwise algorithm through the .select() method.
-
-final_list, final_score = selection.select()
+### Author
++ Main Maintainer: Michael Dubem Igbomezie
