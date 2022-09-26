@@ -2,3 +2,4 @@ update_notes.txt
 Selection_Method.egg-info/
 dist/
 __pycache__
+backup_dist/
