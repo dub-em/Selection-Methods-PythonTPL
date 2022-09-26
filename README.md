@@ -4,7 +4,7 @@
 + Selection Method is a Python module which implements a statistical learning method for selecting features (for predicting a target variable) in a given dataset.
 
 ### Features
-+ Collection of Feature Selection Methods.
++ Collection of Feature Selection Methods
     - Forward Stepwise
     - Backward Stepwise
 
