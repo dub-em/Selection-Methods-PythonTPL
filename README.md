@@ -7,7 +7,6 @@
 + Collection of Feature Selection Methods
     - Forward Stepwise
     - Backward Stepwise
-    - etc
 
 ### Getting Started
 The package can be found on pypi hence you can install it using pip
