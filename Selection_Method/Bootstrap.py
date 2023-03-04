@@ -56,10 +56,11 @@ class bootstrap():
 
         Returns
         -------
-        final_list
-            A list of the independent features selected by the algorithm.
-        max(scores_)
-            The predictive accuracy of the features in the final_list.
+        boot_err_set
+            A pandas dataframe containing the model errors gotten from the sampled dataset.
+        z_value
+            The z_value gotten from the hypothesis test, comparing the model error of the
+            original dataset to the model error gotten from the sampled datasets.
         """
 
         if self.reg_model == None:
@@ -96,5 +97,56 @@ class bootstrap():
             n = np.sqrt(boot_err_set.size)
             z_value = (f - m)/(std/n)
             return (boot_err_set, z_value)
+
+
+    def param_check(self, x, iteration_num:int):
+        """
+        The param_check() method takes  one set of data which the 
+        specified non-model parameter object will be executed on.
+        The last parameter is the number of iterations for the sampling
+        process, which has its mandatory datatype set to integer.
+
+        Parameters
+        ----------
+        x : pandas.core.frame.DataFrame
+        iteration_num: integer
+            The number of iterations for the sampling process.
+
+        Returns
+        -------
+        boot_param_set
+            A pandas dataframe containing the calculated parameters gotten from the sampled dataset.
+        z_value
+            The z_value gotten from the hypothesis test, comparing the parameter of the
+            original dataset to the model error gotten from the sampled datasets.
+        """
+
+        if self.param == None:
+            raise Exception("Sorry, you can't call up this method without specifying a custom function for the parameter you want to calculate.")
+        else:
+            #arguments are assigned to their respective variables.
+            X = x
+            func = self.param
+
+            #computing the parameter for the original dataset for hypothesis test later.
+            samp_param = func(X)
+
+            #sampling the dataset and calculating the parameter (custom function) for each sample.
+            boot_dict = {'Param':[]}
+
+            boot_num = iteration_num
+            for i in range(boot_num):
+                boot = np.random.choice(list(range(X.shape[0])), replace=True, size=X.shape[0])
+                boot_sam = X.iloc[boot,:]
+                boot_dict['Param'].append(func(boot_sam))
+            boot_param_set = pd.DataFrame(boot_dict)
+
+            #hypothesis test
+            m = boot_param_set['Param'].mean()
+            f = samp_param
+            std = boot_param_set['Param'].std()
+            n = np.sqrt(boot_param_set.size)
+            z_value = (f - m)/(std/n)
+            return (boot_param_set, z_value)
 
 
