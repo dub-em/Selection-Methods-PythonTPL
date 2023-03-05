@@ -69,29 +69,32 @@ class comletesubset_regression():
         X_train, X_test = x_train, x_test
         Y_train, Y_test = y_train, y_test
         model = self.reg_model
+        
+        if len_of_subset >= X_train.shape[1]:
+            raise Exception("Sorry, length of feature subset can't be equal to or greater than total number of features")
+        else:
+            #creating a list of all possible combinations of the features, of a certain length.
+            y_predict = {}
+            var = list(X_train.columns)
+            subsets = list(itertools.combinations(var, len_of_subset))
 
-        #creating a list of all possible combinations of the features, of a certain length.
-        y_predict = {}
-        var = list(X_train.columns)
-        subsets = list(itertools.combinations(var, len_of_subset))
+            #taking out a sample of subsets from the comlete set of all subsets, of a certain length.
+            sampled_list = random.sample(subsets, int(len(subsets)*0.4))
 
-        #taking out a sample of subsets from the comlete set of all subsets, of a certain length.
-        sampled_list = random.sample(subsets, int(len(subsets)*0.4))
+            #using each of these subset of features to predict the target variable.
+            for item in sampled_list:
+                item_ = list(item)
+                model.fit(X_train[item_], Y_train)
+                y_predict[str(item)] = list(model.predict(X_test[item_]))
+            y_predict = pd.DataFrame(y_predict)
 
-        #using each of these subset of features to predict the target variable.
-        for item in sampled_list:
-            item_ = list(item)
-            model.fit(X_train[item_], Y_train)
-            y_predict[str(item)] = list(model.predict(X_test[item_]))
-        y_predict = pd.DataFrame(y_predict)
+            for item in sampled_list:
+                y_predict[str(item)] = y_predict[str(item)].explode() 
 
-        for item in sampled_list:
-            y_predict[str(item)] = y_predict[str(item)].explode() 
-
-        #computing the toatl sum of predictions and their aggregate, and comparing this the to target variable.
-        y_predict['TotalSum'] = y_predict.sum(axis=1)
-        y_predict['AggregatePred'] = y_predict['TotalSum']/len(sampled_list)
-        y_predict['ActualTarg'] = Y_test
-        y_predict.head(5)
-        pred_error = mean_squared_error(y_predict['ActualTarg'], y_predict['AggregatePred'])       
-        return (y_predict, pred_error)
+            #computing the toatl sum of predictions and their aggregate, and comparing this the to target variable.
+            y_predict['TotalSum'] = y_predict.sum(axis=1)
+            y_predict['AggregatePred'] = y_predict['TotalSum']/len(sampled_list)
+            y_predict['ActualTarg'] = Y_test.values
+            y_predict.head(5)
+            pred_error = mean_squared_error(y_predict['ActualTarg'], y_predict['AggregatePred'])       
+            return (y_predict, pred_error)
