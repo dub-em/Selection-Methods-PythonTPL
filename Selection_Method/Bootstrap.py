@@ -129,7 +129,7 @@ class bootstrap():
             func = self.param
 
             #computing the parameter for the original dataset for hypothesis test later.
-            samp_param = func(X)
+            samp_param = func(X.values)
 
             #sampling the dataset and calculating the parameter (custom function) for each sample.
             boot_dict = {'Param':[]}
@@ -138,7 +138,7 @@ class bootstrap():
             for i in range(boot_num):
                 boot = np.random.choice(list(range(X.shape[0])), replace=True, size=X.shape[0])
                 boot_sam = X.iloc[boot,:]
-                boot_dict['Param'].append(func(boot_sam))
+                boot_dict['Param'].append(func(boot_sam.values))
             boot_param_set = pd.DataFrame(boot_dict)
 
             #hypothesis test
