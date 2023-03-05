@@ -125,7 +125,7 @@ class bootstrap():
             raise Exception("Sorry, you can't call up this method without specifying a custom function for the parameter you want to calculate.")
         else:
             #arguments are assigned to their respective variables.
-            X = x
+            X = pd.DataFrame(x)
             func = self.param
 
             #computing the parameter for the original dataset for hypothesis test later.
