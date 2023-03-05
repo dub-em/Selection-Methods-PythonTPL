@@ -1,6 +1,4 @@
 import itertools
-import numpy as np
-import pandas as pd
 
 class best_subset():
     """
@@ -17,7 +15,7 @@ class best_subset():
 
         This selection process is creating a set of all possible set
         of combination of a given set of independent features in a dataset.
-        The specified model is then traied on all these sets and the 
+        The specified model is then trained on all these sets and the 
         best subset of features is selected.
 
     CLASS ARGUMENTS
@@ -51,9 +49,9 @@ class best_subset():
         Returns
         -------
         bestsubset
-            A list of the best performing independent features.
+            A list of the best performing independent features from the set of all possible sets.
         max_score
-            The predictive accuracy of best performing independent features.
+            The predictive accuracy of best performing set of independent features.
         """
 
         #arguments are assigned to their respective variables.
