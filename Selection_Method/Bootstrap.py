@@ -36,7 +36,7 @@ class bootstrap():
         self.param = non_model_param
 
     def __str__(self):
-        return 'Forward Stepwise Object using the {} method.'.format(self.reg_model)
+        return 'Bootstrap Object.'
 
     def modelerror_check(self, x, y, iteration_num:int):
         """
